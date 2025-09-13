@@ -30,9 +30,9 @@ struct Args {
     /// Input file. If omitted, stdin is used.
     input: Option<String>,
 
-    /// Line mode. Count lines instead of bytes.
-    #[arg(short, long)]
-    line_mode: bool,
+    /// Count by bytes instead of lines.
+    #[arg(short, long = "byte")]
+    byte_mode: bool,
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -59,10 +59,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let mut bufwriter = std::io::BufWriter::new(std::io::stdout());
 
-    let mode = if args.line_mode {
-        CountModeEnum::Line
-    } else {
+    let mode = if args.byte_mode {
         CountModeEnum::Byte
+    } else {
+        CountModeEnum::Line
     };
 
     if args.input.as_ref().is_none_or(|s| s == "-") {
