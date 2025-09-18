@@ -31,7 +31,7 @@ struct Args {
     input: Option<String>,
 
     /// Count by bytes instead of lines.
-    #[arg(short, long = "byte")]
+    #[arg(short = 'c', long = "byte")]
     byte_mode: bool,
 }
 
